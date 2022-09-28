@@ -1,6 +1,6 @@
 spawn = [50, 0]
 
-function init()
+function init(lives)
 {
     // set some camera attributes
     var VIEW_ANGLE = 45,
@@ -27,8 +27,8 @@ function init()
     noGround = [];
     ground = new Ground(0xffffff, WIDTH, HEIGHT, 10);
     
-    player1 = new Player("player1", 0xffff00, new THREE.Vector2(spawn[0], spawn[1]), 0);
-    player2 = new Player("player2", 0xE389B9, new THREE.Vector2(-300, -200), 2);
+    player1 = new Player("player1", 0xffff00, new THREE.Vector2(spawn[0], spawn[1]), 0, lives);
+    player2 = new Player("player2", 0xE389B9, new THREE.Vector2(-300, -200), 2), lives;
     scene.add(player1.graphic);
     scene.add(player2.graphic);
 

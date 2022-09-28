@@ -64,9 +64,8 @@ function bullet_collision()
                 player1.bullets.splice(i, 1);
                 i--;
                 player2.graphic.position.z = player2.graphic.position.z-0.1;
-                //player2.kill()
-                scene.remove(player2)
-                //player2.removeFromParent()
+                player2.isDestroyed = true;
+                scene.remove(player2.graphic)
             }
     }
 
@@ -90,10 +89,20 @@ function player_collision()
 
     //collision of enemy
     xenemy = player2.graphic.position.x + WIDTH / 2;
+    yenemy = player2.graphic.position.y + HEIGHT / 2;
     if (xenemy <  0 || xenemy > WIDTH) {
         player2.automaticDirection *= -1;
     }
 
+    //collision between player & enemy
+    if (
+        (x >= xenemy - 20 / 2) && 
+        (x <= xenemy + 20 / 2) &&
+        (y >= yenemy - 32 / 2) &&
+        (y <= yenemy + 32 / 2)
+    ) {
+        player1.dead();
+    }
 }
 
 function player_falling()
