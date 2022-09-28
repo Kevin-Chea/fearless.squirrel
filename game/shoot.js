@@ -41,6 +41,7 @@ function collisions()
 
 function bullet_collision()
 {
+    sizeOfBullet = 5;
     //collision between bullet and walls
     for (var i = 0; i < player1.bullets.length; i++)
     {
@@ -53,6 +54,22 @@ function bullet_collision()
         }
     }
 
+    for (var i = 0; i < player1.bullets.length; i++) {
+        if ((player2.graphic.position.x <= player1.bullets[i].position.x + sizeOfBullet)
+            && (player2.graphic.position.x >= player1.bullets[i].position.x - sizeOfBullet)
+            && (player2.graphic.position.y <= player1.bullets[i].position.y + sizeOfBullet)
+            && (player2.graphic.position.y >= player1.bullets[i].position.y - sizeOfBullet))
+            {
+                scene.remove(player1.bullets[i]);
+                player1.bullets.splice(i, 1);
+                i--;
+                player2.graphic.position.z = player2.graphic.position.z-0.1;
+                //player2.kill()
+                scene.remove(player2)
+                //player2.removeFromParent()
+            }
+    }
+
 }
 
 function player_collision()
@@ -61,14 +78,21 @@ function player_collision()
     var x = player1.graphic.position.x + WIDTH / 2;
     var y = player1.graphic.position.y + HEIGHT / 2;
 
-    if (x < 0)
+    if (x < 0) {
         player1.graphic.position.x -= x;
+    }
     if ( x > WIDTH )
         player1.graphic.position.x -= x - WIDTH;
     if ( y < 0 )
         player1.graphic.position.y -= y;
     if ( y > HEIGHT )
         player1.graphic.position.y -= y - HEIGHT;
+
+    //collision of enemy
+    xenemy = player2.graphic.position.x + WIDTH / 2;
+    if (xenemy <  0 || xenemy > WIDTH) {
+        player2.automaticDirection *= -1;
+    }
 
 }
 

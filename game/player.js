@@ -6,6 +6,8 @@ var Player = function(name, color, position, direction) {
     this.bullets = new Array();
     this.direction = direction;
     this.speed = 0;
+    this.automaticDirection = 1;
+    this.automaticSpeed = 2;
 
     this.material = new THREE.MeshLambertMaterial({
         color: color,
@@ -26,6 +28,18 @@ Player.prototype.dead = function () {
         $("#container").html("");
         jQuery('#'+this.name+' >.life').text("Tu es mort !");
         init();
+}
+
+Player.prototype.automaticMove = function () {
+    console.log(player2.graphic.position.x)
+    var moveTo = new THREE.Vector3(
+        this.automaticSpeed * this.automaticDirection + this.position.x,
+        0,
+        this.graphic.position.z
+    );
+
+    this.position = moveTo;
+    this.graphic.position.x = this.position.x;
 }
 
 Player.prototype.accelerate = function (distance) {
