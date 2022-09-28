@@ -34,13 +34,6 @@ function init()
     scene.add(light1);
 }
 
-function removeSpawn(noGround) {
-    index = noGround.indexOf([spawn[0],spawn[1]]);
-    if (index > -1) {
-        console.log("Spawn is in noGround !")
-        noGround.splice(index);
-    }
-}
 
 function Ground(color, size_x, size_y, nb_tile)
 {
